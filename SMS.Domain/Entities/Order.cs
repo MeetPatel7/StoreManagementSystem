@@ -12,7 +12,7 @@ namespace SMS.Domain.Entities
         public int OrderId { get; set; }
         public string OrderName { get; set; }
         public string Status { get; set; }
-        public decimal TotalAmount { get; set; }
+        public Decimal TotalAmount { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public int StoreId { get; set; }

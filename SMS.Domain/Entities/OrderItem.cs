@@ -10,7 +10,7 @@ namespace SMS.Domain.Entities
     {
         public int OrderItemId { get; set; }
         public int Quality { get; set; }
-        public decimal Price { get; set; }
+        public Decimal Price { get; set; }
 
         public int OrderId { get; set; }
         public Order Order { get; set; }

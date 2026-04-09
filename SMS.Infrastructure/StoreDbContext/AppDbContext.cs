@@ -17,7 +17,23 @@ namespace SMS.Infrastructure.StoreDbContext
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<RolePermission> RolePermissions { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
+        //public DbSet<RolePermission> RolePermissions { get; set; }
+        //public DbSet<Permission> Permissions { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserRole>()
+                .HasOne(ur => ur.User)
+                .WithMany(u => u.UserRoles)
+                .HasForeignKey(ur => ur.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<UserRole>()
+                .HasOne(ur => ur.Role)
+                .WithMany(u => u.UserRoles)
+                .HasForeignKey(ur => ur.RoleId)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
     }
 }

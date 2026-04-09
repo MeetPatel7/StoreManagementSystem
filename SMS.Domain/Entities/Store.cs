@@ -14,8 +14,8 @@ namespace SMS.Domain.Entities
         public DateTime CreateAt { get; set; } = DateTime.Now;
 
         public ICollection<User> Users { get; set; }
-        public ICollection<Category> Category { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        //public ICollection<Category> Category { get; set; }
+        //public ICollection<Order> Orders { get; set; }
 
     }
 }

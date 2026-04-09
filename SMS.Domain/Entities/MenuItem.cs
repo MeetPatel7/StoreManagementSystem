@@ -10,7 +10,7 @@ namespace SMS.Domain.Entities
     {
         public int MenuItemId { get; set; }
         public string MenuItemName { get; set; }
-        public decimal Price { get; set; }
+        public Decimal Price { get; set; }
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }
@@ -18,7 +18,7 @@ namespace SMS.Domain.Entities
         public int StoreId { get; set; }
         public Store Store { get; set; }
 
-        public ICollection<OrderItem> OrderItems { get; set; }
+        //public ICollection<OrderItem> OrderItems { get; set; }
 
     }
 }
