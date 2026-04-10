@@ -10,5 +10,9 @@ namespace SMS.Domain.IRepository
     public interface IStoreRepository
     {
         Task<List<Store>> GetAllStores();
+        Task<Store> GetStoreById(int storeId);
+        Task AddStore(Store store);
+        Task UpdateStore(Store store);
+        Task DeleteStore(int storeId);
     }
 }

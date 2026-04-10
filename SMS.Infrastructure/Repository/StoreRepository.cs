@@ -23,5 +23,31 @@ namespace SMS.Infrastructure.Repository
             return await _context.Stores.ToListAsync();
         }
 
+        public async Task<Store> GetStoreById(int storeId)
+        {
+            return await _context.Stores.FindAsync(storeId);
+        }
+
+        public async Task AddStore(Store store)
+        {
+            await _context.Stores.AddAsync(store);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateStore(Store store)
+        {
+            _context.Stores.Update(store);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteStore(int storeId)
+        {
+            var store = await _context.Stores.FindAsync(storeId);
+            if (store != null)
+            {
+                _context.Stores.Remove(store);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
