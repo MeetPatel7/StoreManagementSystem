@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SMS.Application.IServices;
+using SMS.Application.Mapping;
 using SMS.Application.Services;
 using SMS.Domain.IRepository;
 using SMS.Infrastructure.Repository;
@@ -8,6 +9,7 @@ using SMS.Infrastructure.StoreDbContext;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddScoped<IStoreService, StoreService>();
 builder.Services.AddScoped<IStoreRepository, StoreRepository>();

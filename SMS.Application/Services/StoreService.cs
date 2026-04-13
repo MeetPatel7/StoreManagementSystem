@@ -1,4 +1,5 @@
-﻿using SMS.Application.DTOs;
+﻿using AutoMapper;
+using SMS.Application.DTOs;
 using SMS.Application.IServices;
 using SMS.Domain.Entities;
 using SMS.Domain.IRepository;
@@ -13,21 +14,24 @@ namespace SMS.Application.Services
     public class StoreService : IStoreService
     {
         private readonly IStoreRepository _store;
-        public StoreService(IStoreRepository store)
+        private readonly IMapper _mapper;
+        public StoreService(IStoreRepository store, IMapper mapper)
         {
             _store = store;
+            _mapper = mapper;
         }
 
         public async Task<List<StoreDto>> GetAllStores()
         {
             var stores = await _store.GetAllStores();
 
-            return stores.Select(s => new StoreDto
-            {
-                StoreName = s.StoreName,
-                Address = s.Address,
-                CreateAt = s.CreateAt
-            }).ToList();
+            return _mapper.Map<List<StoreDto>>(stores);
+            //return stores.Select(s => new StoreDto
+            //{
+            //    StoreName = s.StoreName,
+            //    Address = s.Address,
+            //    CreateAt = s.CreateAt
+            //}).ToList();
         }
 
         public async Task<StoreDto> GetStoreById(int storeId)
@@ -37,39 +41,44 @@ namespace SMS.Application.Services
             {
                 return null;
             }
-            return new StoreDto
-            {
-                StoreName = store.StoreName,
-                Address = store.Address,
-                CreateAt = store.CreateAt
-            };
+
+            return _mapper.Map<StoreDto>(store);
+            //return new StoreDto
+            //{
+            //    StoreName = store.StoreName,
+            //    Address = store.Address,
+            //    CreateAt = store.CreateAt
+            //};
         }
 
         public async Task<CreateStoreDto> AddStore(CreateStoreDto createStoreDto)
         {
-            var store = new Store
-            {
-                StoreName = createStoreDto.StoreName,
-                Address = createStoreDto.Address
-            };
+            var store = _mapper.Map<Store>(createStoreDto);
+            //var store = new Store
+            //{
+            //    StoreName = createStoreDto.StoreName,
+            //    Address = createStoreDto.Address
+            //};
 
             await _store.AddStore(store);
 
-            return createStoreDto;
+            return _mapper.Map<CreateStoreDto>(store);
+            //return createStoreDto;
         }
 
         public async Task<UpdateStoreDto> UpdateStore(UpdateStoreDto updateStoreDto)
         {
-            var store = new Store
-            {
-                StoreId = updateStoreDto.StoreId,
-                StoreName = updateStoreDto.StoreName,
-                Address = updateStoreDto.Address
-            };
+            var store = _mapper.Map<Store>(updateStoreDto);
+            //var store = new Store
+            //{
+            //    StoreId = updateStoreDto.StoreId,
+            //    StoreName = updateStoreDto.StoreName,
+            //    Address = updateStoreDto.Address
+            //};
 
             await _store.UpdateStore(store);
 
-            return updateStoreDto;
+            return _mapper.Map<UpdateStoreDto>(store);
         }
 
         public async Task DeleteStore(int storeId)
