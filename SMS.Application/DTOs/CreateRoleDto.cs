@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace SMS.Application.DTOs
 {
-    public class StoreDto
+    public class CreateRoleDto
     {
+        public string RoleName { get; set; }
         public int StoreId { get; set; }
-        public string StoreName { get; set; }
-        public string Address { get; set; }
-        public DateTime CreateAt { get; set; }
-
     }
 }
